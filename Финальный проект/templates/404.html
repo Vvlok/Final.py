@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Страница не найдена{% endblock %}
+
+{% block content %}
+<h1>404</h1>
+<p class="lead">Такой страницы нет.</p>
+<a class="btn" href="{{ url_for('index') }}">На главную</a>
+{% endblock %}

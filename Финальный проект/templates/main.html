@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Глобальное потепление{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Глобальное потепление</h1>
+    <p>
+        Земля нагревается быстрее, чем когда-либо за всю историю наблюдений.
+        Здесь можно узнать, почему так происходит, чем это грозит и что с этим
+        можно сделать, а ещё проверить себя и посчитать свой вклад.
+    </p>
+</section>
+
+<h2>Главное в цифрах</h2>
+<div class="stat-grid">
+    {% for stat in stats %}
+    <div class="stat-card">
+        <div class="stat-icon">{{ stat.icon }}</div>
+        <div class="stat-value">{{ stat.value }}</div>
+        <div class="stat-text">{{ stat.text }}</div>
+    </div>
+    {% endfor %}
+</div>
+
+<h2>Что здесь есть</h2>
+<div class="button-grid">
+    {% for slug, page in menu_info.items() %}
+    <a class="card-link" href="{{ url_for('info', slug=slug) }}">
+        <span class="card-icon">{{ page.icon }}</span>
+        <strong>{{ page.menu }}</strong>
+        <small>{{ page.title }}</small>
+    </a>
+    {% endfor %}
+    <a class="card-link" href="{{ url_for('facts') }}">
+        <span class="card-icon">🔎</span>
+        <strong>Интересное</strong>
+        <small>Факты про лёд, океан, природу и города</small>
+    </a>
+    <a class="card-link" href="{{ url_for('quiz') }}">
+        <span class="card-icon">❓</span>
+        <strong>Викторина</strong>
+        <small>9 вопросов, проверь себя</small>
+    </a>
+    <a class="card-link" href="{{ url_for('calculator') }}">
+        <span class="card-icon">🧮</span>
+        <strong>Калькулятор</strong>
+        <small>Сколько CO₂ выбрасываешь ты</small>
+    </a>
+</div>
+{% endblock %}

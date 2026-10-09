@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Интересное о потеплении{% endblock %}
+
+{% block content %}
+<h1>🔎 Интересное</h1>
+<p class="lead">Выбери вкладку и узнай что-нибудь неожиданное.</p>
+
+<!-- Вкладки: обычные ссылки, активная подсвечивается -->
+<div class="tabs">
+    {% for slug, t in tabs.items() %}
+    <a class="tab {{ 'active' if slug == active }}" href="{{ url_for('facts', slug=slug) }}">
+        {{ t.icon }} {{ t.title }}
+    </a>
+    {% endfor %}
+</div>
+
+<!-- Список карточек с картинками выбранной вкладки -->
+<div class="fact-list">
+    {% for item in tab['items'] %}
+    <article class="fact-card">
+        {# Вместо картинки пока крупный эмодзи на цветном фоне. Чтобы поставить свою картинку,
+             положи файл в static/img и замени div на <img src="..."> с url_for('static', ...) #}
+        <div class="fact-img" style="background: {{ item.color }}">{{ item.emoji }}</div>
+        <div class="fact-body">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.text }}</p>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% endblock %}

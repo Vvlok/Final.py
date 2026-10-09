@@ -1,0 +1,453 @@
+/* ----- Общие сбросы ----- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark: #1f3a3d;
+    --accent: #e8743b;
+    --accent-dark: #c95f2b;
+    --green: #2f8f5b;
+    --bg: #f6f4ef;
+    --card: #ffffff;
+    --text: #3a3a3a;
+    --muted: #6b6b6b;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding-top: 64px; /* отступ под фиксированную шапку */
+}
+
+/* ----- Шапка ----- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 56px;
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    padding: 8px 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+.logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.nav a {
+    color: #d6e4e2;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: 0.2s;
+}
+.nav a:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+}
+.nav a.active {
+    background: var(--accent);
+    color: white;
+}
+
+/* ----- Основной контент ----- */
+.main-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px 20px 40px;
+    min-height: calc(100vh - 120px);
+}
+h1 {
+    font-size: 34px;
+    color: var(--dark);
+    margin-bottom: 12px;
+}
+h2 {
+    font-size: 26px;
+    color: var(--dark);
+    margin: 28px 0 12px;
+}
+h3 {
+    font-size: 20px;
+    color: var(--dark);
+    margin: 16px 0 8px;
+}
+p {
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+.lead {
+    font-size: 19px;
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+.footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    padding: 20px;
+}
+
+/* ----- Кнопки ----- */
+.btn {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 17px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.btn:hover {
+    background: var(--accent-dark);
+}
+.page-links {
+    margin-top: 30px;
+}
+
+/* ----- Главная ----- */
+.hero {
+    background: linear-gradient(135deg, #1f3a3d, #2f6f6a);
+    color: white;
+    padding: 36px 28px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+}
+.hero h1 {
+    color: white;
+}
+.hero p {
+    color: #e3eeec;
+    font-size: 19px;
+    margin-bottom: 0;
+}
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+.stat-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 14px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.stat-icon {
+    font-size: 34px;
+}
+.stat-value {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--accent);
+    margin: 6px 0;
+}
+.stat-text {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+/* Сетка карточек-ссылок (3 колонки) */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 10px 0 30px;
+}
+.card-link {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: var(--card);
+    color: var(--text);
+    text-decoration: none;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: 0.2s;
+}
+.card-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
+}
+.card-icon {
+    font-size: 32px;
+}
+.card-link strong {
+    font-size: 20px;
+    color: var(--dark);
+}
+.card-link small {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+/* ----- Информационные страницы ----- */
+.info-section {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 6px 24px 14px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+.points {
+    margin: 0 0 8px 22px;
+}
+.points li {
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 6px;
+}
+
+/* ----- Вкладки ----- */
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+.tab {
+    background: #e6e2d8;
+    color: var(--dark);
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 16px;
+    transition: 0.2s;
+}
+.tab:hover {
+    background: #d9d4c6;
+}
+.tab.active {
+    background: var(--dark);
+    color: white;
+}
+.fact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.fact-card {
+    display: flex;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.fact-img {
+    width: 150px;
+    min-width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+}
+.fact-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.fact-body {
+    padding: 14px 20px;
+}
+.fact-body h3 {
+    margin-top: 4px;
+}
+.fact-body p {
+    margin-bottom: 4px;
+}
+
+/* ----- Викторина ----- */
+.question {
+    background: var(--card);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+.question legend,
+.question h3 {
+    font-size: 19px;
+    font-weight: bold;
+    color: var(--dark);
+    padding: 0 6px;
+}
+.question h3 {
+    margin-top: 0;
+    padding: 0;
+}
+.option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    padding: 9px 12px;
+    margin-top: 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #f3f1ea;
+    transition: 0.15s;
+}
+.option:hover {
+    background: #e9e5d8;
+}
+.option input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+}
+.question.right {
+    border-color: var(--green);
+}
+.question.wrong {
+    border-color: #d8584a;
+}
+.explain {
+    color: var(--muted);
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+/* ----- Результат и калькулятор ----- */
+.result-box {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 24px;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.result-score {
+    font-size: 38px;
+    font-weight: bold;
+    color: var(--accent);
+    margin-bottom: 6px;
+}
+.calc-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--card);
+    padding: 24px;
+    border-radius: 14px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.calc-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 17px;
+}
+.calc-form input[type="number"],
+.calc-form select {
+    padding: 10px 12px;
+    font-size: 17px;
+    border: 1px solid #c8c4b6;
+    border-radius: 8px;
+    max-width: 260px;
+}
+.calc-form .checkbox {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+.calc-form .checkbox input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent);
+}
+.calc-form .btn {
+    align-self: flex-start;
+}
+.compare {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 17px;
+    margin: 10px 0 6px;
+}
+.bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.bar-row {
+    display: grid;
+    grid-template-columns: 190px 1fr 70px;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+.bar-track {
+    background: #ece8dc;
+    border-radius: 6px;
+    height: 18px;
+    overflow: hidden;
+}
+.bar-fill {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 6px;
+}
+.bar-value {
+    text-align: right;
+    font-weight: bold;
+}
+.note {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 10px;
+}
+
+/* ----- Телефон ----- */
+@media (max-width: 760px) {
+    body {
+        padding-top: 110px;
+    }
+    .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .button-grid {
+        grid-template-columns: 1fr;
+    }
+    .fact-card {
+        flex-direction: column;
+    }
+    .fact-img {
+        width: 100%;
+        height: 110px;
+    }
+    .bar-row {
+        grid-template-columns: 1fr 60px;
+    }
+    .bar-name {
+        grid-column: 1 / -1;
+    }
+    .bar-track {
+        grid-column: 1;
+    }
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Глобальное потепление{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- ====== Шапка с меню (одинаковая на всех страницах) ====== -->
+    <header class="header">
+        <a class="logo" href="{{ url_for('index') }}">🌍 Потепление</a>
+        <nav class="nav">
+            <a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' }}">Главная</a>
+            {% for slug, page in menu_info.items() %}
+                <a href="{{ url_for('info', slug=slug) }}"
+                   class="{{ 'active' if request.view_args and request.view_args.get('slug') == slug and request.endpoint == 'info' }}">{{ page.menu }}</a>
+            {% endfor %}
+            <a href="{{ url_for('facts') }}" class="{{ 'active' if request.endpoint == 'facts' }}">Интересное</a>
+            <a href="{{ url_for('quiz') }}" class="{{ 'active' if request.endpoint == 'quiz' }}">Викторина</a>
+            <a href="{{ url_for('calculator') }}" class="{{ 'active' if request.endpoint == 'calculator' }}">Калькулятор</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        Учебный проект на Flask. Цифры приблизительные и округлены.
+    </footer>
+
+</body>
+</html>
