@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Калькулятор углеродного следа{% endblock %}
+
+{% block content %}
+<h1>🧮 Калькулятор углеродного следа</h1>
+<p class="lead">Оценка того, сколько CO₂ ты «выбрасываешь» за год. Заполни то, что знаешь: пустые поля считаются нулём.</p>
+
+{# При повторном показе формы подставляем то, что человек уже ввёл #}
+{% set v = result['values'] if result else {} %}
+
+<form class="calc-form" method="post" action="{{ url_for('calculator') }}#result">
+    <label>
+        Автомобиль: сколько км в неделю
+        <input type="number" name="car_km" min="0" step="any"
+               value="{{ ('%g' % v.car_km) if result else '' }}" placeholder="например, 40">
+    </label>
+
+    <label>
+        Общественный транспорт: сколько км в неделю
+        <input type="number" name="public_km" min="0" step="any"
+               value="{{ ('%g' % v.public_km) if result else '' }}" placeholder="например, 30">
+    </label>
+
+    <label>
+        Короткие перелёты (до 3 часов): сколько в год
+        <input type="number" name="flights_short" min="0" step="1"
+               value="{{ ('%g' % v.flights_short) if result else '' }}" placeholder="например, 1">
+    </label>
+
+    <label>
+        Дальние перелёты: сколько в год
+        <input type="number" name="flights_long" min="0" step="1"
+               value="{{ ('%g' % v.flights_long) if result else '' }}" placeholder="например, 0">
+    </label>
+
+    <label>
+        Электричество: сколько кВт·ч в месяц
+        <input type="number" name="kwh" min="0" step="any"
+               value="{{ ('%g' % v.kwh) if result else '' }}" placeholder="например, 150">
+    </label>
+
+    <label>
+        Питание
+        <select name="diet">
+            {% for key, name in diets.items() %}
+            <option value="{{ key }}"
+                {% if (v.diet if result else 'meat_sometimes') == key %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+        </select>
+    </label>
+
+    <label class="checkbox">
+        <input type="checkbox" name="sort_waste" {% if result and v.sort_waste %}checked{% endif %}>
+        Сортирую отходы
+    </label>
+
+    <button class="btn" type="submit">Посчитать</button>
+</form>
+
+{% if result %}
+<div class="result-box" id="result">
+    <div class="result-score">{{ result.total }} т CO₂ в год</div>
+    <p>{{ result.verdict }}</p>
+
+    <div class="compare">
+        <span>🌍 Среднее по миру: <strong>{{ result.world_average }} т</strong>
+            (твой результат: {{ result.vs_average }}% от среднего)</span>
+        <span>🎯 Ориентир на середину века: <strong>{{ result.target }} т</strong></span>
+        <span>🌳 Чтобы поглотить такой объём за год, нужно около <strong>{{ result.trees }}</strong> деревьев</span>
+    </div>
+
+    <h3>Из чего складывается твой след</h3>
+    <div class="bars">
+        {% for item in result.breakdown %}
+        <div class="bar-row">
+            <span class="bar-name">{{ item.name }}</span>
+            <div class="bar-track"><span class="bar-fill" style="width: {{ item.width }}%"></span></div>
+            <span class="bar-value">{{ item.tons }} т</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h3>Что даст больше всего: «{{ result.biggest }}»</h3>
+    <ul class="points">
+        {% for tip in result.tips %}
+        <li>{{ tip }}</li>
+        {% endfor %}
+    </ul>
+
+    <p class="note">Коэффициенты округлены и сильно упрощены: калькулятор показывает порядок величин, а не точный учёт.</p>
+</div>
+{% endif %}
+{% endblock %}
